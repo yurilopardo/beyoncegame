@@ -1,0 +1,20 @@
+{
+  "name": "queen-b",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc --noEmit && vite build --base=./",
+    "preview": "vite preview --host 0.0.0.0",
+    "test:browser": "node tests/smoke.cjs && node tests/traverse.cjs"
+  },
+  "dependencies": {
+    "phaser": "3.90.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vite": "7.1.9",
+    "playwright": "1.64.1"
+  }
+}
