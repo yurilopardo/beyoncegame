@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Sprite production specification; no atlas frames shipped yet",
+  "cell": {
+    "width": 48,
+    "height": 64
+  },
+  "feetPivot": {
+    "x": 24,
+    "y": 60
+  },
+  "transparentBackground": true,
+  "directionAuthored": "right",
+  "allowMirrorLeft": true,
+  "totalAuthoredFrames": 65,
+  "states": [
+    {
+      "id": "idle",
+      "frames": [
+        "player_idle_00",
+        "player_idle_01",
+        "player_idle_02",
+        "player_idle_03",
+        "player_idle_04",
+        "player_idle_05"
+      ],
+      "frameDurationMs": [
+        125,
+        125,
+        125,
+        125,
+        125,
+        125
+      ],
+      "loop": true,
+      "layer": "body"
+    },
+    {
+      "id": "run",
+      "frames": [
+        "player_run_00",
+        "player_run_01",
+        "player_run_02",
+        "player_run_03",
+        "player_run_04",
+        "player_run_05",
+        "player_run_06",
+        "player_run_07"
+      ],
+      "frameDurationMs": [
+        83.33333333333333,
+        83.33333333333333,
+        83.33333333333333,
+        83.33333333333333,
+        83.33333333333333,
+        83.33333333333333,
+        83.33333333333333,
+        83.33333333333333
+      ],
+      "loop": true,
+      "layer": "legs_or_body"
+    },
+    {
+      "id": "jump_start",
+      "frames": [
+        "player_jump_start_00",
+        "player_jump_start_01"
+      ],
+      "frameDurationMs": [
+        40,
+        40
+      ],
+      "loop": false,
+      "layer": "legs_or_body"
+    },
+    {
+      "id": "jump_up",
+      "frames": [
+        "player_jump_up_00",
+        "player_jump_up_01"
+      ],
+      "frameDurationMs": [
+        100,
+        100
+      ],
+      "loop": false,
+      "layer": "legs_or_body"
+    },
+    {
+      "id": "jump_fall",
+      "frames": [
+        "player_jump_fall_00",
+        "player_jump_fall_01"
+      ],
+      "frameDurationMs": [
+        100,
+        100
+      ],
+      "loop": false,
+      "layer": "legs_or_body"
+    },
+    {
+      "id": "land",
+      "frames": [
+        "player_land_00",
+        "player_land_01",
+        "player_land_02"
+      ],
+      "frameDurationMs": [
+        50,
+        50,
+        50
+      ],
+      "loop": false,
+      "layer": "legs_or_body"
+    },
+    {
+      "id": "dash",
+      "frames": [
+        "player_dash_00",
+        "player_dash_01",
+        "player_dash_02",
+        "player_dash_03"
+      ],
+      "frameDurationMs": [
+        45,
+        45,
+        45,
+        45
+      ],
+      "loop": false,
+      "layer": "body"
+    },
+    {
+      "id": "bee_cast",
+      "frames": [
+        "player_bee_cast_00",
+        "player_bee_cast_01",
+        "player_bee_cast_02",
+        "player_bee_cast_03"
+      ],
+      "frameDurationMs": [
+        50,
+        50,
+        50,
+        50
+      ],
+      "loop": false,
+      "layer": "upper"
+    },
+    {
+      "id": "swarm_cast",
+      "frames": [
+        "player_swarm_cast_00",
+        "player_swarm_cast_01",
+        "player_swarm_cast_02",
+        "player_swarm_cast_03",
+        "player_swarm_cast_04",
+        "player_swarm_cast_05"
+      ],
+      "frameDurationMs": [
+        66.66666666666667,
+        66.66666666666667,
+        66.66666666666667,
+        66.66666666666667,
+        66.66666666666667,
+        66.66666666666667
+      ],
+      "loop": false,
+      "layer": "upper"
+    },
+    {
+      "id": "croc_cast",
+      "frames": [
+        "player_croc_cast_00",
+        "player_croc_cast_01",
+        "player_croc_cast_02",
+        "player_croc_cast_03",
+        "player_croc_cast_04",
+        "player_croc_cast_05",
+        "player_croc_cast_06",
+        "player_croc_cast_07"
+      ],
+      "frameDurationMs": [
+        75,
+        75,
+        75,
+        75,
+        75,
+        75,
+        75,
+        75
+      ],
+      "loop": false,
+      "layer": "upper"
+    },
+    {
+      "id": "hurt",
+      "frames": [
+        "player_hurt_00",
+        "player_hurt_01"
+      ],
+      "frameDurationMs": [
+        80,
+        80
+      ],
+      "loop": false,
+      "layer": "body"
+    },
+    {
+      "id": "defeat",
+      "frames": [
+        "player_defeat_00",
+        "player_defeat_01",
+        "player_defeat_02",
+        "player_defeat_03",
+        "player_defeat_04",
+        "player_defeat_05"
+      ],
+      "frameDurationMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": false,
+      "layer": "body"
+    },
+    {
+      "id": "victory",
+      "frames": [
+        "player_victory_00",
+        "player_victory_01",
+        "player_victory_02",
+        "player_victory_03",
+        "player_victory_04",
+        "player_victory_05",
+        "player_victory_06",
+        "player_victory_07",
+        "player_victory_08",
+        "player_victory_09",
+        "player_victory_10",
+        "player_victory_11"
+      ],
+      "frameDurationMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "layer": "body"
+    }
+  ],
+  "gameplayEvents": {
+    "jumpImpulse": "immediate_on_accepted_input",
+    "beeEmissionMs": 80,
+    "swarmEmissionMs": 160,
+    "crocodileEmissionMs": 240,
+    "eventClock": "simulation_time_not_visual_frame_index"
+  },
+  "rules": [
+    "Keep feet pivot identical in every frame.",
+    "Use separate upper body casting and locomotion layers.",
+    "No root motion; PlayerController owns position.",
+    "Hold final jump_up pose until vertical velocity is nonnegative.",
+    "Land animation can be canceled immediately by movement or jump."
+  ]
+}

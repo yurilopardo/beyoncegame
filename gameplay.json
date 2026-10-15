@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Especificação de design para implementação do protótipo Queen B",
+  "units": {
+    "distance": "logical_pixels",
+    "speed": "pixels_per_second",
+    "acceleration": "pixels_per_second_squared",
+    "duration": "milliseconds"
+  },
+  "runtime": {
+    "engine": "phaser",
+    "engineVersion": "3.90.0",
+    "language": "typescript",
+    "builder": "vite",
+    "viewportWidth": 480,
+    "viewportHeight": 270,
+    "physicsHz": 60,
+    "pixelArt": true,
+    "roundPixels": true,
+    "antialias": false,
+    "preferredIntegerScales": [
+      2,
+      3,
+      4
+    ],
+    "allowFitForSmallViewports": true
+  },
+  "player": {
+    "healthMax": 5,
+    "runMaxSpeed": 160,
+    "groundAcceleration": 1600,
+    "groundDeceleration": 2000,
+    "airAcceleration": 1000,
+    "gravity": 1200,
+    "jumpVelocity": -360,
+    "jumpReleaseVelocityClamp": -160,
+    "fallMaxSpeed": 600,
+    "coyoteTimeMs": 100,
+    "jumpBufferMs": 120,
+    "doubleJump": false,
+    "wallJump": false,
+    "dash": {
+      "speed": 440,
+      "durationMs": 180,
+      "cooldownFromStartMs": 800,
+      "airUsesPerLanding": 1,
+      "gravityDuringDash": 0,
+      "verticalSpeedOnExit": 0,
+      "invulnerable": false,
+      "stopAtWall": true
+    },
+    "damage": {
+      "contactDamage": 1,
+      "invulnerabilityMs": 1000,
+      "knockbackSpeedX": 90,
+      "knockbackDurationMs": 120,
+      "knockbackVelocityY": -120,
+      "cancelUnemittedAttackAndRefund": true
+    },
+    "body": {
+      "width": 18,
+      "height": 40,
+      "anchor": "feet"
+    },
+    "sprite": {
+      "cellWidth": 48,
+      "cellHeight": 64,
+      "feetPivotX": 24,
+      "feetPivotY": 60
+    },
+    "animationPriority": [
+      "defeat",
+      "hurt",
+      "dash",
+      "cast_layer",
+      "airborne",
+      "run",
+      "idle"
+    ]
+  },
+  "power": {
+    "max": 100,
+    "initial": 60,
+    "regenerationPerSecond": 6,
+    "regenerationDelayAfterSpendMs": 1500,
+    "honeyGain": 20,
+    "firstEnemyDefeatGain": 5,
+    "checkpointActivationValue": 100,
+    "refundBeforeEmissionOnly": true
+  },
+  "combat": {
+    "groundAndAirAttacks": true,
+    "direction": "last_valid_horizontal_facing",
+    "lockOtherAttacksUntilEmission": true,
+    "recoveryCancelableByOtherAttackAfterEmission": true,
+    "dashCancelsCast": true,
+    "cooldownsBegin": "accepted_input",
+    "stompDamage": false,
+    "bee": {
+      "key": "J",
+      "damage": 1,
+      "cost": 0,
+      "cooldownMs": 280,
+      "emitAtMs": 80,
+      "animationDurationMs": 200,
+      "speed": 300,
+      "lifetimeMs": 600,
+      "hitboxWidth": 8,
+      "hitboxHeight": 6,
+      "maxActive": 3,
+      "repeatWhileHeld": true,
+      "moveMultiplier": 1,
+      "maxHitsPerTarget": 1,
+      "destroyOnFirstEnemy": true,
+      "destroyOnSolidWall": true,
+      "destroysHostilePaper": true
+    },
+    "swarm": {
+      "key": "K",
+      "damagePerPulse": 1,
+      "maxPulsesPerTarget": 3,
+      "pulseIntervalMs": 400,
+      "cost": 35,
+      "cooldownMs": 2400,
+      "emitAtMs": 160,
+      "animationDurationMs": 400,
+      "speed": 120,
+      "lifetimeMs": 1200,
+      "hitboxWidth": 80,
+      "hitboxHeight": 56,
+      "repeatWhileHeld": false,
+      "moveMultiplierDuringCast": 0.8,
+      "piercesEnemies": true,
+      "slowPercent": 30,
+      "slowDurationMs": 600,
+      "bossImmuneToSlow": true,
+      "destroyOnSolidWall": true,
+      "destroysHostilePaper": false
+    },
+    "crocodile": {
+      "key": "L",
+      "damage": 6,
+      "cost": 100,
+      "requiresFullPower": true,
+      "cooldownMs": 1200,
+      "emitAtMs": 240,
+      "animationDurationMs": 600,
+      "speed": 280,
+      "lifetimeMs": 1300,
+      "hitboxWidth": 56,
+      "hitboxHeight": 18,
+      "repeatWhileHeld": false,
+      "moveMultiplierDuringCast": 0.6,
+      "maxHitsPerTarget": 1,
+      "piercesEnemies": true,
+      "breaksContractShield": true,
+      "breaksMarkedBarriers": true,
+      "destroyOnSolidWall": true,
+      "destroysHostilePaper": true,
+      "gravity": 0
+    }
+  },
+  "enemies": {
+    "executive": {
+      "health": 2,
+      "bodyWidth": 18,
+      "bodyHeight": 36,
+      "patrolSpeed": 40,
+      "detectRange": 120,
+      "telegraphMs": 450,
+      "attackSpeed": 100,
+      "attackDurationMs": 600,
+      "recoverMs": 700,
+      "turnAtCliff": true,
+      "contactDamage": 1
+    },
+    "gatekeeper": {
+      "health": 4,
+      "bodyWidth": 24,
+      "bodyHeight": 38,
+      "patrolSpeed": 28,
+      "turnIntervalMs": 800,
+      "shieldBlocks": [
+        "bee",
+        "swarm"
+      ],
+      "shieldSide": "front",
+      "vulnerableSide": "back",
+      "crocodileBreakAppliesFullDamage": true,
+      "contactDamage": 1
+    },
+    "producer": {
+      "health": 3,
+      "bodyWidth": 18,
+      "bodyHeight": 36,
+      "patrolSpeed": 0,
+      "detectRange": 260,
+      "shotCycleMs": 2200,
+      "telegraphMs": 600,
+      "projectileSpeed": 110,
+      "projectileLifetimeMs": 3000,
+      "projectileWidth": 10,
+      "projectileHeight": 6,
+      "projectileDamage": 1,
+      "retargetAfterTelegraph": false,
+      "contactDamage": 1
+    },
+    "wakeMarginBeyondCamera": 80,
+    "onlyAttackWhenVisible": true,
+    "maxAwake": 6,
+    "maxSimultaneousHostileAttackActors": 2
+  },
+  "boss": {
+    "name": "Presidente do Conselho",
+    "health": 24,
+    "healthAtPhase2": 12,
+    "phase2TelegraphMultiplier": 0.8,
+    "fixedFacing": "left",
+    "contactDamage": 1,
+    "shieldBlocksOutsideExposure": [
+      "bee",
+      "swarm"
+    ],
+    "crocodileShieldBreakDamage": 6,
+    "forcedExposureMs": 2500,
+    "normalExposureMs": 2500,
+    "forcedExposureCancelsCurrentAttack": true,
+    "forcedExposureClearsHostileProjectiles": true,
+    "afterExposureRestartCycleAt": 0,
+    "cycle": [
+      {
+        "id": "low_contract",
+        "telegraphMs": 600,
+        "projectileSpeed": 120,
+        "projectileCenterAboveFloor": 16,
+        "projectileWidth": 10,
+        "projectileHeight": 6,
+        "recoveryMs": 800,
+        "damage": 1
+      },
+      {
+        "id": "high_contract",
+        "telegraphMs": 600,
+        "projectileSpeed": 120,
+        "projectileCenterAboveFloor": 60,
+        "projectileWidth": 10,
+        "projectileHeight": 6,
+        "recoveryMs": 800,
+        "damage": 1
+      },
+      {
+        "id": "approval_wave",
+        "telegraphMs": 800,
+        "projectileSpeed": 140,
+        "projectileCenterAboveFloor": 6,
+        "projectileWidth": 16,
+        "projectileHeight": 10,
+        "recoveryMs": 900,
+        "damage": 1
+      }
+    ],
+    "defeatClearsHostileProjectiles": true,
+    "mustEnterPortalAfterDefeat": true
+  },
+  "collectibles": {
+    "noteScore": 10,
+    "sealScore": 250,
+    "enemyScore": 100,
+    "bossScore": 1000,
+    "heartHealthGain": 1,
+    "fixedNotes": 30,
+    "fixedHoney": 4,
+    "fixedHearts": 2,
+    "fixedSeals": 3
+  },
+  "respawn": {
+    "maxDelayMs": 2000,
+    "health": "active_player_health_max",
+    "powerBeforeCheckpoint": 60,
+    "powerAfterCheckpoint1": 60,
+    "powerAfterCheckpoint2": 100,
+    "keepCollectedIdsOnDeath": true,
+    "keepDestroyedBarrierIdsOnDeath": true,
+    "keepScoreOnDeath": true,
+    "rewardEachEnemyOncePerRun": true,
+    "checkpointRefillOncePerRun": true,
+    "resetEnemiesAfterCheckpoint": true,
+    "resetBossOnDeath": true
+  },
+  "camera": {
+    "deadzoneWidth": 96,
+    "lookAheadX": 32,
+    "fixedY": true,
+    "integerCoordinates": true
+  },
+  "assistance": {
+    "healthMax": 7,
+    "enemySpeedMultiplier": 0.8,
+    "powerRegenerationPerSecond": 10,
+    "changesGeometry": false,
+    "changesPlayerJump": false
+  },
+  "controls": {
+    "left": [
+      "A",
+      "LEFT"
+    ],
+    "right": [
+      "D",
+      "RIGHT"
+    ],
+    "jump": [
+      "SPACE"
+    ],
+    "dash": [
+      "SHIFT"
+    ],
+    "bee": [
+      "J"
+    ],
+    "swarm": [
+      "K"
+    ],
+    "crocodile": [
+      "L"
+    ],
+    "pause": [
+      "ESC"
+    ],
+    "retryWhenDefeated": [
+      "R"
+    ]
+  },
+  "pause": {
+    "pauseOnFocusLoss": true,
+    "explicitResumeRequired": true,
+    "freezeAllGameTimers": true
+  },
+  "persistence": {
+    "run": "memory_only",
+    "settings": "localStorage",
+    "onlineServices": false
+  },
+  "palette": {
+    "background": "#050505",
+    "architecture": "#17131A",
+    "foreground": "#302630",
+    "pink": "#F2A6C8",
+    "actionPink": "#FF4FA0",
+    "text": "#F6EEF3",
+    "gold": "#F4C95D",
+    "crocodile": "#4D9B67"
+  }
+}
